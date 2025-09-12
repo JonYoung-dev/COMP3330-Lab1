@@ -10,7 +10,6 @@ import { zValidator } from '@hono/zod-validator'
 const ok = <T>(c: any, data: T, status = 200) => c.json({ data }, status)
 const err = (c: any, message: string, status = 400) => c.json({ error: { message } }, status)
 
-
 const expenses: Expense[] = [
   { id: 1, title: 'Coffee', amount: 4 },
   { id: 2, title: 'Groceries', amount: 35 },
@@ -21,6 +20,11 @@ const expenseSchema = z.object({
   id: z.number().int().positive(),
   title: z.string().min(3).max(100),
   amount: z.number().int().positive(),
+})
+
+const updateExpenseSchema = z.object({
+  title: z.string().min(3).max(100).optional(),
+  amount: z.number().int().positive().optional(),
 })
 
 const createExpenseSchema = expenseSchema.omit({ id: true })
@@ -58,3 +62,28 @@ export const expensesRoute = new Hono()
     const [removed] = expenses.splice(idx, 1)
     return c.json({ deleted: removed })
   })
+
+  // PUT /api/expenses/:id → full replace
+expensesRoute.put('/:id{\\d+}', zValidator('json', createExpenseSchema), (c) => {
+  const id = Number(c.req.param('id'))
+  const idx = expenses.findIndex((e) => e.id === id)
+  if (idx === -1) return c.json({ error: 'Not found' }, 404)
+
+  const data = c.req.valid('json')
+  const updated: Expense = { id, ...data }
+  expenses[idx] = updated
+  return c.json({ expense: updated })
+})
+
+// PATCH /api/expenses/:id → partial update
+expensesRoute.patch('/:id{\\d+}', zValidator('json', updateExpenseSchema), (c) => {
+  const id = Number(c.req.param('id'))
+  const idx = expenses.findIndex((e) => e.id === id)
+
+  const data = c.req.valid('json')
+  const current = expenses[idx]
+    if (idx === -1 || !current) return c.json({ error: 'Not found' }, 404);
+  const updated: Expense = { ...current, ...data }
+  expenses[idx] = updated
+  return c.json({ expense: updated })
+})
