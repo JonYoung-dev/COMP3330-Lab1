@@ -49,6 +49,7 @@ export default function ExpenseNewPage() {
   return (
     <section className="mx-auto max-w-3xl p-6">
       <form onSubmit={onSubmit} className="space-y-3 rounded border bg-background p-6">
+        <p>Test</p>
         <h2 className="text-xl font-semibold">New Expense</h2>
 
         <label className="block">
