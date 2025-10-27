@@ -31,3 +31,7 @@ app.route('/api/auth', authRoute)
 
 // server/app.ts
 app.route('/api/secure', secureRoute)
+
+import { uploadRoute } from './routes/upload'
+app.route('/api/upload', uploadRoute)
+
