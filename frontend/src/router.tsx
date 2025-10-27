@@ -1,39 +1,50 @@
-import { RouterProvider, createRouter, createRootRoute, createRoute } from '@tanstack/react-router'
-import App from './App'
-import ExpenseNewPage from './routes/expenses.new'
-import { AuthBar } from './components/AuthBar'
+import { RouterProvider, createRouter, createRootRoute, createRoute, useParams } from "@tanstack/react-router";
+import App from "./App";
+import ExpenseNewPage from "./routes/expenses.new";
+import ExpensesListPage from "./routes/expenses.list";
+import ExpenseDetailPage from "./routes/expenses.detail";
+import Home from "./routes/home";
 
 const rootRoute = createRootRoute({
   component: () => <App />,
-})
+});
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/',
-  component: () => <AuthBar />,
-})
+  path: "/",
+  component: () => <Home />,
+});
 
 const expensesRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/expenses',
-  component: () => <p>Expenses Layout</p>,
-})
+  path: "/expenses",
+  component: () => <ExpensesListPage />,
+});
 
-const newExpenseRoute = createRoute({
+const expensesNewRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/expenses/new',
-  component: ExpenseNewPage,
-})
+  path: "/expenses/new",
+  component: () => <ExpenseNewPage />,
+});
 
-const routeTree = rootRoute.addChildren([indexRoute, expensesRoute, newExpenseRoute])
+const expensesDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/expenses/$id",
+  component: () => {
+    const { id } = useParams({ from: expensesDetailRoute.id });
+    return <ExpenseDetailPage id={id} />;
+  },
+});
 
-export const router = createRouter({ routeTree })
+const routeTree = rootRoute.addChildren([indexRoute, expensesRoute, expensesNewRoute, expensesDetailRoute]);
+
+export const router = createRouter({ routeTree });
 
 router.update({
   defaultNotFoundComponent: () => <p>Page not found</p>,
   defaultErrorComponent: ({ error }) => <p>Error: {(error as Error).message}</p>,
-})
+});
 
 export function AppRouter() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }

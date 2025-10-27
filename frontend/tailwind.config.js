@@ -1,11 +1,8 @@
-import { fontFamily } from 'tailwindcss/defaultTheme'
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  darkMode: ['class'],
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: ["class"],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
   	extend: {
   		fontFamily: {
@@ -64,4 +61,4 @@ export default {
   	}
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
