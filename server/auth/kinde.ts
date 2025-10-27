@@ -1,6 +1,6 @@
 // server/auth/kinde.ts
 import { Hono } from 'hono'
-import { getCookie, setCookie, deleteCookie } from 'hono/cookie'
+import { setCookie, deleteCookie, getCookie } from 'hono/cookie'
 import type { SessionManager } from '@kinde-oss/kinde-typescript-sdk'
 import { createKindeServerClient, GrantType } from '@kinde-oss/kinde-typescript-sdk'
 
@@ -22,12 +22,7 @@ export function sessionFromHono(c: any): SessionManager {
       return getCookie(c, key) ?? null
     },
     async setSessionItem(key: string, value: unknown) {
-      setCookie(c, key, String(value), {
-        httpOnly: true,
-        sameSite: 'Lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-      })
+      setCookie(c, key, String(value), { httpOnly: true, sameSite: 'lax', path: '/', secure: false })
     },
     async removeSessionItem(key: string) {
       deleteCookie(c, key)
@@ -43,6 +38,7 @@ export function sessionFromHono(c: any): SessionManager {
 export const authRoute = new Hono()
   // 1) Start login: get hosted login URL from SDK and redirect
   .get('/login', async (c) => {
+    console.log("we herer");
     const session = sessionFromHono(c)
     const url = await kindeClient.login(session)
     return c.redirect(url.toString())

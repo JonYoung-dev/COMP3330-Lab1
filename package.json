@@ -3,6 +3,11 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "dotenv": "^17.2.2",
+    "drizzle-kit": "^0.31.4"
+  },
   "scripts": {
     "start": "bun server/index.ts",
     "dev": "bun --hot server/index.ts",
@@ -10,20 +15,17 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "dotenv": "^17.2.2",
-    "drizzle-kit": "^0.31.4"
-  },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.911.0",
+    "@aws-sdk/s3-request-presigner": "^3.911.0",
     "@hono/zod-validator": "^0.7.2",
     "@kinde-oss/kinde-typescript-sdk": "^2.13.0",
     "@neondatabase/serverless": "^1.0.1",
     "drizzle-orm": "^0.44.5",
     "hono": "^4.9.6",
-    "zod": "^4.1.8"
+    "zod": "^4.1.5"
   }
 }

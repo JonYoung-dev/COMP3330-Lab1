@@ -1,7 +1,5 @@
 // server/db/schema.ts
-import { pgTable, serial, varchar, integer } from 'drizzle-orm/pg-core'
-
-
+import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
 
 export const expenses = pgTable('expenses', {
   id: serial('id').primaryKey(),

@@ -1,6 +1,6 @@
 {
-  "id": "2451788f-2f92-43b2-afda-ff16cd91f36d",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "2312df16-ac1d-4699-a628-33a789c75923",
+  "prevId": "2451788f-2f92-43b2-afda-ff16cd91f36d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -25,6 +25,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "file_url": {
+          "name": "file_url",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
