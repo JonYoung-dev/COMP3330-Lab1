@@ -6,7 +6,7 @@ import { useState } from "react";
 export type Expense = { id: number; title: string; amount: number; fileUrl?: string | null };
 
 // Use "/api" if you configured a Vite proxy in dev; otherwise use
-// const API = 'http://localhost:3000/api'
+// const API = 'process.envHOSTEDURL" + "api'
 const API = "/api";
 
 export default function ExpensesListPage() {

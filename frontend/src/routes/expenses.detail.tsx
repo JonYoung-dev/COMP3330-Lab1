@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import UploadExpenseForm from "../components/UploadExpenseForm";
 
 type Expense = { id: number; title: string; amount: number; fileUrl?: string | null };
-const API = "/api"; // if you’re using Vite proxy; otherwise "http://localhost:3000/api"
+const API = "/api"; // if you’re using Vite proxy; otherwise "process.envHOSTEDURL" + "api"
 
 export default function ExpenseDetailPage({ id }: { id: number }) {
   const queryClient = useQueryClient();
