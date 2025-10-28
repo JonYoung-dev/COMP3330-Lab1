@@ -4,15 +4,16 @@ WORKDIR /app
 
 # Install deps
 COPY package.json bun.lock ./
-RUN cd frontend && bun i
 RUN bun install --frozen-lockfile
 
 # Build frontend
 COPY frontend ./frontend
+RUN cd frontend && bun i
 RUN cd frontend && bun run build
 
 # Copy server and compiled frontend to ./server/public
 COPY server ./server
+RUN cd frontend && bun i
 RUN mkdir -p server/public && cp -r frontend/dist/* server/public/
 
 # Start runtime image
