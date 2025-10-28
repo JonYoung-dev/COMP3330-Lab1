@@ -4,7 +4,7 @@ export function ExpensesList() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["expenses"],
     queryFn: async () => {
-      const res = await fetch("process.envHOSTEDURL" + "api/expenses");
+      const res = await fetch(process.env.HOSTEDURL + "api/expenses");
       if (!res.ok) throw new Error("Failed to fetch expenses");
       return res.json() as Promise<{ expenses: { id: number; title: string; amount: number }[] }>;
     },

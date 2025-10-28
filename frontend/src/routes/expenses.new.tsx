@@ -3,7 +3,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const API = "process.envHOSTEDURL" + "api"; // if no Vite proxy, use: 'process.envHOSTEDURL" + "api'
+const API = process.env.HOSTEDURL + "api"; // if no Vite proxy, use: 'process.envHOSTEDURL" + "api'
 
 export default function ExpenseNewPage() {
   const router = useRouter();
