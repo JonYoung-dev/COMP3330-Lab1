@@ -4,6 +4,7 @@ WORKDIR /app
 
 # Install deps
 COPY package.json bun.lock ./
+RUN cd frontend && bun i
 RUN bun install --frozen-lockfile
 
 # Build frontend
