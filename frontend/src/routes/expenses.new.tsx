@@ -72,7 +72,7 @@ export default function ExpenseNewPage() {
           />
         </label>
 
-        {error && <p className="text-sm text-red-600">"Bad entry: try again"</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
 
         <div className="flex items-center gap-2">
           <button
