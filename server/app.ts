@@ -17,7 +17,7 @@ app.use("*", logger());
 app.use(
   "/api/*",
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.HOSTEDURL || "http://localhost:5173",
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
   })
