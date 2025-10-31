@@ -17,7 +17,7 @@ app.use("*", logger());
 app.use(
   "/api/*",
   cors({
-    origin: process.env.HOSTEDURL || "https://comp3330-lab1.onrender.com/",
+    origin: "https://comp3330-lab1.onrender.com/",
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
   })

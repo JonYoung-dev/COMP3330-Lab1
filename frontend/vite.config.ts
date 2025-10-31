@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: process.env.HOSTEDURL,
+        target: "https://comp3330-lab1.onrender.com/",
         changeOrigin: true,
       },
     },
