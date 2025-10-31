@@ -7,7 +7,7 @@ export type Expense = { id: number; title: string; amount: number; fileUrl?: str
 
 // Use "/api" if you configured a Vite proxy in dev; otherwise use
 // const API = 'process.envHOSTEDURL" + "api'
-const API = "/api";
+const API = "https://comp3330-lab1.onrender.com/api";
 
 export default function ExpensesListPage() {
   const qc = useQueryClient();
