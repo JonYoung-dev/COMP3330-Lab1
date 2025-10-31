@@ -7,8 +7,8 @@ const honoApp = new Hono();
 
 // allow only your frontend origin and credentials
 honoApp.use("*", cors({
-  origin: process.env.HOSTEDURL || "http://localhost:5173", // change to your frontend origin
-  credentials: true,
+  origin: process.env.HOSTEDURL || "https://comp3330-lab1.onrender.com/", 
+  : true,
   // optionally: allowHeaders: ["Content-Type", "Authorization"], allowMethods: ["GET","POST","PUT","PATCH","OPTIONS"]
 }));
 
